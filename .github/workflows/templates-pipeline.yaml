@@ -1,0 +1,40 @@
+name: Templates CI/CD
+
+on:
+  push: [main]
+
+jobs:
+  build:
+    name: Verify Templates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: AWS Credentials Setup
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: update apt
+        run: sudo apt-get update
+        shell: bash
+
+      - name: install build-essentials
+        run: sudo apt-get install build-essential
+        shell: bash
+
+      - name: install awscli
+        run: python -m pip install --upgrade pip awscli
+        shell: bash
+
+      - name: Lint templates
+        run: make lint-templates
+        shell: bash
+
+      - name: Validate templates
+        run: make validate-templates
+        shell: bash
+

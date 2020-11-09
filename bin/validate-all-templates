@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+template_dir=$1
+
+if [[ -z "${template_dir}" ]]; then
+  echo "Please specify a directory of cloudformation templates."
+  echo "Ex: ${0} templates"
+  exit 1
+fi
+
+error=0
+for tpl in $template_dir/*.yaml; do
+  echo "Validating ${tpl}"
+  aws cloudformation validate-template --template-body file://${tpl}
+
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: ${tpl}"
+    error=1
+  fi
+done
+
+if [[ ${error} -ne 0 ]]; then
+  exit $error
+fi
+

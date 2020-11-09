@@ -1,0 +1,17 @@
+Description: |
+  Provision an S3 bucket.
+
+  * BucketName is randomly generated
+  * BucketEncryption enabled using server side encryption
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+
+Outputs:
+  BucketName:
+    Value: !Ref S3Bucket
