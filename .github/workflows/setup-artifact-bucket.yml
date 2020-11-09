@@ -35,4 +35,4 @@ jobs:
 
       - name: Print Outputs
         shell: bash
-        run: /bin/bash -c 'aws cloudformation describe-stacks --stack-name cloud-templates | grep OUTPUTS'
+        run: aws cloudformation describe-stacks --profile=ghaction --stack-name cloud-templates --query 'Stacks[*].Outputs' --output text

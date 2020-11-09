@@ -11,5 +11,3 @@ Resources:
 Outputs:
   BucketName:
     Value: !Ref S3Bucket
-  BucketArn:
-    Value: !GetAtt S3Bucket.Arn
