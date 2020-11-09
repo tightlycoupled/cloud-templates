@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 lint-templates:
 	cfn-lint templates/*.yaml
 
