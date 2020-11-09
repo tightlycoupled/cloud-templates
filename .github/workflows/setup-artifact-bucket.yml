@@ -27,7 +27,6 @@ jobs:
         shell: bash
 
       - name: Deploy S3 bucket
-        if: github.ref == refs/heads/main
         uses: aws-actions/aws-cloudformation-github-deploy@v1.0.3
         with:
           name: cloud-templates
