@@ -23,16 +23,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
 
-      - name: update apt
-        run: sudo apt-get update
-        shell: bash
-
-      - name: install build-essentials
-        run: sudo apt-get install build-essential
-        shell: bash
-
       - name: install awscli
-        run: python -m pip install --upgrade pip awscli
+        run: python -m pip install --upgrade pip awscli cfn-lint
         shell: bash
 
       - name: Lint templates
